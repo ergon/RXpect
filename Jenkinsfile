@@ -9,8 +9,10 @@ pipeline {
 
     stages {
 		stage('Build') {
-			sh 'buildstack update && buildstack --version'
-			sh 'buildstack run "./gradlew build" "openjdk8"'
+			steps {
+				sh 'buildstack update && buildstack --version'
+				sh 'buildstack run "./gradlew build" "openjdk8"'
+			}
 		}
     }
 }
