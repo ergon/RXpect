@@ -61,7 +61,7 @@ publishing {
         maven {
             credentials {
                 username 'deployment'
-                password rootProject.getProperty('publishPassword')
+                password rootProject.hasProperty('publishPassword') ? rootProject.getProperty('publishPassword') : ''
             }
             url 'http://coop-mws-nexus.ergon.ch/repository/releases/'
         }
