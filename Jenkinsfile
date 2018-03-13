@@ -21,7 +21,7 @@ pipeline {
 
 		stage('Publish') {
 			steps {
-				sh "buildstack run -e PUBILISH_PASSWORD=${params.publishPassword} --buildnumber ${BUILD_NUMBER} \"./gradlew -PtechVersion=\${BUILD_NUMBER} -PpublishPassword=\${PUBISH_PASSWORD} publish\" openjdk8"
+				sh "buildstack run -e PUBILISH_PASSWORD=${params.publishPassword} --buildnumber ${BUILD_NUMBER} \"./gradlew -PtechVersion=\${BUILD_NUMBER} -PpublishPassword=\${PUBILISH_PASSWORD} publish\" openjdk8"
 			}
 		}
     }
