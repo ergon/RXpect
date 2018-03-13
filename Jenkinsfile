@@ -8,7 +8,7 @@ pipeline {
     }
 
     parameters {
-    	password(description: 'Publish Password' name: 'publishPassword')
+    	password(description: 'Publish Password', name: 'publishPassword')
     }
 
     stages {
