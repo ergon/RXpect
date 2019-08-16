@@ -12,12 +12,14 @@ import org.mockito.stubbing.OngoingStubbing
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit.MILLISECONDS
 
-abstract class BaseExpectation : FulfillableExpectation {
+abstract class BaseExpectation(
+    count: Int = 1
+) : FulfillableExpectation {
     companion object {
         const val verifyTimeoutInMilliSeconds = 100L
     }
 
-    private val latch: CountDownLatch = CountDownLatch(1)
+    private val latch: CountDownLatch = CountDownLatch(count)
 
     lateinit var invocation: Invocation
     lateinit var mock: Any

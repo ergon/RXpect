@@ -5,7 +5,8 @@ import com.nhaarman.mockitokotlin2.whenever
 
 class DefaultExpectationBuilderImpl<T>(
     private val methodCall: T,
-    private val defaultAnswer: () -> T
+    private val defaultAnswer: () -> T,
+    override val count: Int
 ) : DefaultExpectationBuilder<T> {
 
     private var answer: () -> T =

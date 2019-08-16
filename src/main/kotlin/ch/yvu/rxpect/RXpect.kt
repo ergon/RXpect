@@ -42,9 +42,10 @@ object RXpect {
             defaultValueGenerator("Please provide a return value as follows expectSubscribe(mock.foo()).thenReturn(returnValue)"))
             .build()
 
-    inline fun <reified T> expect(methodCall: T): DefaultExpectation<T> =
+    inline fun <reified T> expect(methodCall: T, count: Int = 1): DefaultExpectation<T> =
         DefaultExpectationBuilderImpl(
             methodCall,
-            defaultValueGenerator("Please provide a return value as follows expect(mock.foo()).thenReturn(returnValue)"))
-            .build()
+            defaultValueGenerator("Please provide a return value as follows expect(mock.foo()).thenReturn(returnValue)"),
+            count
+        ).build()
 }

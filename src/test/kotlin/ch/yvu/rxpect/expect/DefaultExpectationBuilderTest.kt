@@ -18,6 +18,17 @@ class DefaultExpectationBuilderTest {
     }
 
     @Test
+    fun fulfilledExpectationWithCount() {
+        val mock: TestClass = mock()
+        val expectation = expect(mock.foo(any()), 2).thenReturn(2)
+
+        mock.foo("hello")
+        mock.foo("hello")
+
+        expectation.verify()
+    }
+
+    @Test
     fun fulfilledExpectationWithNoReturnValue() {
         val mock: TestClass = mock()
         val expectation = expect(mock.foo(any()))
@@ -42,6 +53,16 @@ class DefaultExpectationBuilderTest {
     fun unfulfilledExpectation() {
         val mock: TestClass = mock()
         val expectation = expect(mock.foo(any())).thenReturn(2)
+
+        expectation.verify()
+    }
+
+    @Test(expected = WantedButNotInvoked::class)
+    fun unfulfilledExpectationWithCount() {
+        val mock: TestClass = mock()
+        val expectation = expect(mock.foo(any()), 2).thenReturn(2)
+
+        mock.foo("hello")
 
         expectation.verify()
     }
