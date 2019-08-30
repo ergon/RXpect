@@ -6,7 +6,8 @@ import io.reactivex.Observable
 
 class SubscribeObservableExpectationBuilder<T>(
     private val methodCall: Observable<T>?,
-    private val defaultValue: T?
+    private val defaultValue: T?,
+    override val count: Int
 ) : SubscribeExpectationBuilder<T> {
 
     private var value: T? = defaultValue

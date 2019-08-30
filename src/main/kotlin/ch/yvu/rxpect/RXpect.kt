@@ -27,20 +27,21 @@ object RXpect {
     fun expectDispose(methodCall: Completable?): Expectation =
         DisposeExpectationBuilder.expectDispose(methodCall)
 
-    fun <T> expectSubscribe(methodCall: Observable<T>?): SubscribeExpectation<T> =
-        SubscribeObservableExpectationBuilder(methodCall, null).build()
+    fun <T> expectSubscribe(methodCall: Observable<T>?, count: Int = 1): SubscribeExpectation<T> =
+        SubscribeObservableExpectationBuilder(methodCall, null, count).build()
 
-    fun <T> expectSubscribe(methodCall: Maybe<T>?): SubscribeExpectation<T> =
-        SubscribeMaybeExpectationBuilder(methodCall, null).build()
+    fun <T> expectSubscribe(methodCall: Maybe<T>?, count: Int = 1): SubscribeExpectation<T> =
+        SubscribeMaybeExpectationBuilder(methodCall, null, count).build()
 
-    fun expectSubscribe(methodCall: Completable?): Expectation =
-        SubscribeCompletableExpectationBuilder(methodCall).build()
+    fun expectSubscribe(methodCall: Completable?, count: Int = 1): Expectation =
+        SubscribeCompletableExpectationBuilder(methodCall, count).build()
 
-    inline fun <reified T : Any> expectSubscribe(methodCall: Single<T>?): SubscribeExpectation<T> =
+    inline fun <reified T : Any> expectSubscribe(methodCall: Single<T>?, count: Int = 1): SubscribeExpectation<T> =
         SubscribeSingleExpectationBuilder(
             methodCall,
-            defaultValueGenerator("Please provide a return value as follows expectSubscribe(mock.foo()).thenReturn(returnValue)"))
-            .build()
+            defaultValueGenerator("Please provide a return value as follows expectSubscribe(mock.foo()).thenReturn(returnValue)"),
+            count
+        ).build()
 
     inline fun <reified T> expect(methodCall: T, count: Int = 1): DefaultExpectation<T> =
         DefaultExpectationBuilderImpl(

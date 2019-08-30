@@ -18,10 +18,32 @@ class SubscribeMaybeExpectationBuilderTest {
     }
 
     @Test
+    fun buildsCorrectExpectationWithCountForMethodCalled() {
+        val mock: TestClass = mock()
+        val expectation = expectSubscribe(mock.method(), 2).thenEmit(Unit)
+
+        mock.method().subscribe()
+        mock.method().subscribe()
+
+        expectation.verify()
+    }
+
+    @Test
     fun buildsCorrectExpectationForMethodCalledWithoutEmittedValue() {
         val mock: TestClass = mock()
         val expectation = expectSubscribe(mock.method())
 
+        mock.method().subscribe()
+
+        expectation.verify()
+    }
+
+    @Test
+    fun buildsCorrectExpectationWithCountForMethodCalledWithoutEmittedValue() {
+        val mock: TestClass = mock()
+        val expectation = expectSubscribe(mock.method(), 2)
+
+        mock.method().subscribe()
         mock.method().subscribe()
 
         expectation.verify()
@@ -32,6 +54,17 @@ class SubscribeMaybeExpectationBuilderTest {
         val mock: TestClass = mock()
         val expectation = expectSubscribe(mock.method()).thenEmit(Unit)
 
+        mock.method()
+
+        expectation.verify()
+    }
+
+    @Test(expected = WantedButNotInvoked::class)
+    fun buildsCorrectExpectationWithCountForMethodNotCalled() {
+        val mock: TestClass = mock()
+        val expectation = expectSubscribe(mock.method(), 2).thenEmit(Unit)
+
+        mock.method().subscribe()
         mock.method()
 
         expectation.verify()

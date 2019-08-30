@@ -6,7 +6,8 @@ import io.reactivex.Single
 
 class SubscribeSingleExpectationBuilder<T>(
     private val methodCall: Single<T>?,
-    private val defaultAnswer: () -> T
+    private val defaultAnswer: () -> T,
+    override val count: Int
 ) : SubscribeExpectationBuilder<T> {
 
     private var answer: () -> T =

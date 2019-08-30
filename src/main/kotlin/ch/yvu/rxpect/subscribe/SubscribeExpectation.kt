@@ -8,7 +8,7 @@ import org.mockito.exceptions.verification.WantedButNotInvoked
 import org.mockito.invocation.Invocation
 import org.mockito.invocation.Location
 
-class SubscribeExpectation<T>(val subscribeExpectationBuilder: SubscribeExpectationBuilder<T>) : BaseExpectation() {
+class SubscribeExpectation<T>(val subscribeExpectationBuilder: SubscribeExpectationBuilder<T>) : BaseExpectation(subscribeExpectationBuilder.count) {
     override fun buildNotWantedButInvoked(invocation: Invocation, location: Location): MockitoAssertionError =
         MockitoAssertionError("The ${invocation.method.returnType.simpleName} returned by ${invocation.method.name} was expected to never been subscribed to. But it was subscribed to at \n $location.")
 

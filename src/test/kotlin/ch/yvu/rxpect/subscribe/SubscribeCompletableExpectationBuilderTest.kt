@@ -17,11 +17,33 @@ class SubscribeCompletableExpectationBuilderTest {
         expectation.verify()
     }
 
+    @Test
+    fun buildsCorrectExpectationWithCountForMethodCalled() {
+        val mock: TestClass = mock()
+        val expectation = expectSubscribe(mock.method(), 1)
+
+        mock.method().subscribe()
+        mock.method().subscribe()
+
+        expectation.verify()
+    }
+
     @Test(expected = WantedButNotInvoked::class)
     fun buildsCorrectExpectationForMethodNotCalled() {
         val mock: TestClass = mock()
         val expectation = expectSubscribe(mock.method())
 
+        mock.method()
+
+        expectation.verify()
+    }
+
+    @Test(expected = WantedButNotInvoked::class)
+    fun buildsCorrectExpectationWithCountForMethodNotCalled() {
+        val mock: TestClass = mock()
+        val expectation = expectSubscribe(mock.method(), 2)
+
+        mock.method().subscribe()
         mock.method()
 
         expectation.verify()

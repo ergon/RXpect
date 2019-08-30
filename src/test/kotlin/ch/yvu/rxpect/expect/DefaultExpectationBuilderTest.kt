@@ -39,7 +39,7 @@ class DefaultExpectationBuilderTest {
     }
 
     @Test
-    fun fulfilledExpectationWithReturnValueWithoutDefaultVAlue() {
+    fun fulfilledExpectationWithReturnValueWithoutDefaultValue() {
         val mock: TestClass = mock()
         val foo: Foo = mock()
         val expectation = expect(mock.foo2()).thenReturn(foo)

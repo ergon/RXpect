@@ -6,7 +6,8 @@ import io.reactivex.Maybe
 
 class SubscribeMaybeExpectationBuilder<T>(
     private val methodCall: Maybe<T>?,
-    private val defaultValue: T?
+    private val defaultValue: T?,
+    override val count: Int
 ) : SubscribeExpectationBuilder<T> {
     private var value: T? = defaultValue
 

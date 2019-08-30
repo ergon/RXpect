@@ -5,7 +5,8 @@ import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Completable
 
 class SubscribeCompletableExpectationBuilder(
-    private val methodCall: Completable?
+    private val methodCall: Completable?,
+    override val count: Int
 ) : SubscribeExpectationBuilder<Unit> {
 
     override fun emittedValue(value: Unit) {
